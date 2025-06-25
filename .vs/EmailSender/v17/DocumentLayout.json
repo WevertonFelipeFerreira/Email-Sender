@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\verta\\source\\repos\\Email-Sender\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E4892EF4-55A8-4335-91E7-F21902731B18}|src\\EmailSender.Api\\EmailSender.Api.csproj|c:\\users\\verta\\source\\repos\\email-sender\\src\\emailsender.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4892EF4-55A8-4335-91E7-F21902731B18}|src\\EmailSender.Api\\EmailSender.Api.csproj|solutionrelative:src\\emailsender.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4892EF4-55A8-4335-91E7-F21902731B18}|src\\EmailSender.Api\\EmailSender.Api.csproj|c:\\users\\verta\\source\\repos\\email-sender\\src\\emailsender.api\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4892EF4-55A8-4335-91E7-F21902731B18}|src\\EmailSender.Api\\EmailSender.Api.csproj|solutionrelative:src\\emailsender.api\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4892EF4-55A8-4335-91E7-F21902731B18}|src\\EmailSender.Api\\EmailSender.Api.csproj|c:\\users\\verta\\source\\repos\\email-sender\\src\\emailsender.api\\controllers\\templatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4892EF4-55A8-4335-91E7-F21902731B18}|src\\EmailSender.Api\\EmailSender.Api.csproj|solutionrelative:src\\emailsender.api\\controllers\\templatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\verta\\source\\repos\\Email-Sender\\src\\EmailSender.Api\\Program.cs",
+              "RelativeDocumentMoniker": "src\\EmailSender.Api\\Program.cs",
+              "ToolTip": "C:\\Users\\verta\\source\\repos\\Email-Sender\\src\\EmailSender.Api\\Program.cs",
+              "RelativeToolTip": "src\\EmailSender.Api\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-25T23:42:43.159Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "WeatherForecastController.cs",
+              "DocumentMoniker": "C:\\Users\\verta\\source\\repos\\Email-Sender\\src\\EmailSender.Api\\Controllers\\WeatherForecastController.cs",
+              "RelativeDocumentMoniker": "src\\EmailSender.Api\\Controllers\\WeatherForecastController.cs",
+              "ToolTip": "C:\\Users\\verta\\source\\repos\\Email-Sender\\src\\EmailSender.Api\\Controllers\\WeatherForecastController.cs",
+              "RelativeToolTip": "src\\EmailSender.Api\\Controllers\\WeatherForecastController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-25T23:42:39.563Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TemplateController.cs",
+              "DocumentMoniker": "C:\\Users\\verta\\source\\repos\\Email-Sender\\src\\EmailSender.Api\\Controllers\\TemplateController.cs",
+              "RelativeDocumentMoniker": "src\\EmailSender.Api\\Controllers\\TemplateController.cs",
+              "ToolTip": "C:\\Users\\verta\\source\\repos\\Email-Sender\\src\\EmailSender.Api\\Controllers\\TemplateController.cs",
+              "RelativeToolTip": "src\\EmailSender.Api\\Controllers\\TemplateController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-25T23:42:36.808Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
