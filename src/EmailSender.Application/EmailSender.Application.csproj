@@ -7,11 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Handlers\" />
-    <Folder Include="Dtos\ViewModels\" />
     <Folder Include="Mappers\Resolvers\" />
-    <Folder Include="Mappers\Profiles\" />
     <Folder Include="Queries\Handlers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="MediatR" Version="12.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EmailSender.Core\EmailSender.Core.csproj" />
   </ItemGroup>
 
 </Project>
