@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EmailSender.Api.Controllers
 {
     [ApiController]
-    [Route("template")]
+    [Route("templates")]
     public class TemplateController(IMediator mediator) : ControllerBase
     {
         [HttpPost]
