@@ -11,8 +11,11 @@ namespace EmailSender.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateTemplateCommand command)
         {
-            var response = await mediator.Send(command);
-            return Created("", response);
+            var result = await mediator.Send(command);
+            if (!result.IsValid && result.Notifications.Any())
+                return BadRequest(new { Title = string.Join(" | ", result.Notifications.Select(x=> x.Message))});
+
+            return Created("", result.Value); // TODO update empty string to the get by id route when added.
         }
     }
 }
