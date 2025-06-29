@@ -1,6 +1,7 @@
 using EmailSender.Application.Mappers;
 using EmailSender.Infraestructure;
 using EmailSender.Application;
+using EmailSender.Api.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseAuthorization();
 
