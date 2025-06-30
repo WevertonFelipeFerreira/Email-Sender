@@ -1,6 +1,8 @@
 ﻿using EmailSender.Core.Interfaces.Repositories;
+using EmailSender.Core.Interfaces.Repositories.Common;
 using EmailSender.Infraestructure.Persistence.Contex;
 using EmailSender.Infraestructure.Persistence.Repositories;
+using EmailSender.Infraestructure.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

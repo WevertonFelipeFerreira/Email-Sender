@@ -16,7 +16,8 @@ namespace EmailSender.Application.Commands.Handlers
             if (!entity.IsValid)
                 return Result<IdModel>.CreateErrors(entity.Notifications);
 
-            await repository.CreateAsync(entity);
+            // TODO html sanitize before saving
+            await repository.InsertAsync(entity);
             return Result<IdModel>.CreateSuccess(new IdModel(entity.Id));
         }
     }

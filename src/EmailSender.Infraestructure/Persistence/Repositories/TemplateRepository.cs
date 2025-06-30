@@ -1,15 +1,12 @@
 ﻿using EmailSender.Core.Entities;
 using EmailSender.Core.Interfaces.Repositories;
 using EmailSender.Infraestructure.Persistence.Contex;
+using EmailSender.Infraestructure.Persistence.Repositories.Common;
 
 namespace EmailSender.Infraestructure.Persistence.Repositories
 {
-    public class TemplateRepository(EmailSenderDbContext dbContex) : ITemplateRepository
+    public class TemplateRepository : RepositoryBase<Template>, ITemplateRepository
     {
-        public async Task CreateAsync(Template entity)
-        {
-            await dbContex.Templates.AddAsync(entity);
-            await dbContex.SaveChangesAsync();
-        }
+        public TemplateRepository(EmailSenderDbContext dbContex) : base(dbContex) { }
     }
 }
