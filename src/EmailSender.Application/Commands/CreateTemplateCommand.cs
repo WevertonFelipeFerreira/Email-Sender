@@ -4,7 +4,7 @@ using MediatR;
 
 namespace EmailSender.Application.Commands
 {
-    public class CreateTemplateCommand : IRequest<Result<IdModel>>
+    public class CreateTemplateCommand : IRequest<Result<IdResponseModel>>
     {
         public string? Name { get; set; }
         public string? Content { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace EmailSender.Application.Dtos.ViewModels
 {
-    public record IdModel(Guid id)
+    public record IdResponseModel(Guid id)
     {
     }
 }

@@ -7,16 +7,15 @@ using MediatR;
 
 namespace EmailSender.Application.Commands.Handlers
 {
-    public class CreateTemplateCommandHandler(ITemplateRepository repository, IMapper mapper)
-        : IRequestHandler<CreateTemplateCommand, Result<IdResponseModel>>
+    internal class CreateAttributeCommandHandler(IAttributeRepository repository, IMapper mapper) 
+        : IRequestHandler<CreateAttributeCommand, Result<IdResponseModel>>
     {
-        public async Task<Result<IdResponseModel>> Handle(CreateTemplateCommand request, CancellationToken cancellationToken)
+        public async Task<Result<IdResponseModel>> Handle(CreateAttributeCommand request, CancellationToken cancellationToken)
         {
-            var entity = mapper.Map<Template>(request);
-            if (!entity.IsValid)
+            var entity = mapper.Map<AttributeEntity>(request);
+            if(!entity.IsValid)
                 return Result<IdResponseModel>.CreateErrors(entity.Notifications);
 
-            // TODO html sanitize before saving
             await repository.InsertAsync(entity);
             return Result<IdResponseModel>.CreateSuccess(new IdResponseModel(entity.Id));
         }

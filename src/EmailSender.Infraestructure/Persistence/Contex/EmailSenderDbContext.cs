@@ -1,5 +1,4 @@
 ﻿using EmailSender.Core.Entities;
-using EmailSender.Core.Entities.Common;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -17,5 +16,6 @@ namespace EmailSender.Infraestructure.Persistence.Contex
         }
 
         public DbSet<Template> Templates { get; set; } = null!;
+        public DbSet<AttributeEntity> Attributes { get; set; } = null!;
     }
 }

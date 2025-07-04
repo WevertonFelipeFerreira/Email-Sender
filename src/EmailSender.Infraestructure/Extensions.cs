@@ -14,6 +14,7 @@ namespace EmailSender.Infraestructure
         public static IServiceCollection AddDependencyInjection(this IServiceCollection services)
         {
             services.AddScoped<ITemplateRepository, TemplateRepository>();
+            services.AddScoped<IAttributeRepository, AttributeRepository>();
 
             return services;
         }
