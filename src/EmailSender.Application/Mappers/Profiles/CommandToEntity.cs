@@ -11,12 +11,14 @@ namespace EmailSender.Application.Mappers.Profiles
         {
             #region Template
             CreateMap<CreateTemplateCommand, Template>()
-                .ForMember(dest => dest.Html, opt => opt.MapFrom(src=> src.Content))
-                .AfterMap((x,y) => y.Validate());
+                .ForMember(dest => dest.Html, opt => opt.MapFrom(src => src.Content))
+                .ForMember(dest => dest.Attribute, opt => opt.Ignore())
+                .AfterMap((src, dest) => dest.Validate());
             #endregion
 
             #region Attribute
-            CreateMap<CreateAttributeCommand, AttributeEntity>();
+            CreateMap<CreateAttributeCommand, AttributeEntity>()
+                .AfterMap((src, dest) => dest.Validate());
             CreateMap<FieldModel, Field>();
             #endregion
         }

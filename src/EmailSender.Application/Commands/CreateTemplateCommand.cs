@@ -9,6 +9,6 @@ namespace EmailSender.Application.Commands
         public string? Name { get; set; }
         public string? Content { get; set; }
         public string? Subject { get; set; }
-        public string[]? SupportedAttributes { get; set; }
+        public Guid? AttributeId { get; set; }
     }
 }

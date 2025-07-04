@@ -11,8 +11,16 @@ namespace EmailSender.Core.Entities
             Name = name;
             Fields = fields;
         }
-        public string Name { get; set; }
-        public IEnumerable<Field> Fields { get; set; }
+
+        public AttributeEntity(string name, IEnumerable<Field> fields, IEnumerable<Template> templates)
+            : this(name, fields)
+        {
+            Templates = templates;
+        }
+
+        public string Name { get; private set; }
+        public IEnumerable<Field> Fields { get; private set; }
+        public IEnumerable<Template> Templates { get; private set; }
 
         public override void Validate()
         {

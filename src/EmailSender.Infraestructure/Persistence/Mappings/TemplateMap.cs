@@ -1,7 +1,6 @@
 ﻿using EmailSender.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Newtonsoft.Json;
 
 namespace EmailSender.Infraestructure.Persistence.Mappings
 {
@@ -12,18 +11,9 @@ namespace EmailSender.Infraestructure.Persistence.Mappings
             builder.ToTable("Template");
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.SupportedAttributes)
-                .HasConversion(
-                    supportedAttributesArray =>
-                        supportedAttributesArray != null && supportedAttributesArray.Length > 0
-                            ? JsonConvert.SerializeObject(supportedAttributesArray)
-                            : null,
-
-                    attributesJson =>
-                        string.IsNullOrEmpty(attributesJson)
-                            ? Array.Empty<string>()
-                            : JsonConvert.DeserializeObject<string[]>(attributesJson)
-            );
+            builder.HasOne(x => x.Attribute)
+                .WithMany(x => x.Templates)
+                .HasForeignKey(x => x.AttributeId);
 
             builder.Ignore(x => x.IsValid);
             builder.Ignore(x => x.Notifications);

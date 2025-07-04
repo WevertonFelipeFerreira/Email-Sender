@@ -5,22 +5,29 @@ namespace EmailSender.Core.Entities
 {
     public class Template : EntityBase
     {
-        public Template(string name, string html, string subject)
+        public Template(string name , string html, string subject)
         {
             Name = name;
             Html = html;
             Subject = subject;
         }
 
-        public Template(string name, string content, string subject, string[]? supportedAttributes) : this(name, content, subject)
+        public Template(string name, string html, string subject, Guid attributeId) 
+            : this(name, html, subject)
         {
-            SupportedAttributes = supportedAttributes;
+            AttributeId = attributeId;
+        }
+
+        public Template()
+        {
+            
         }
 
         public string Name { get; private set; }
         public string Html { get; private set; }
         public string Subject { get; private set; }
-        public string[]? SupportedAttributes { get; private set; }
+        public AttributeEntity? Attribute { get; private set; }
+        public Guid? AttributeId { get; private set; }
 
         public override void Validate()
         {
