@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Mappers\Resolvers\" />
-    <Folder Include="Queries\Handlers\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -8,7 +8,8 @@ namespace EmailSender.Application.Mappers
         public static IServiceCollection AddMapper(this IServiceCollection services)
         {
             return services.AddAutoMapper(
-                    typeof(CommandToEntity)
+                    typeof(CommandToEntity),
+                    typeof(EntityToViewModel)
                 );
         }
     }
