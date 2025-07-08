@@ -1,7 +1,8 @@
+using EmailSender.Api.Middlewares;
+using EmailSender.Api.ProblemDetail;
+using EmailSender.Application;
 using EmailSender.Application.Mappers;
 using EmailSender.Infraestructure;
-using EmailSender.Application;
-using EmailSender.Api.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,7 @@ builder.Services.AddDb(builder.Configuration);
 builder.Services.AddMapper();
 builder.Services.AddCqrs();
 builder.Services.AddDependencyInjection();
+builder.Services.AddCustomModelStateValidation();
 
 var app = builder.Build();
 
