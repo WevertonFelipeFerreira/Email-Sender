@@ -17,17 +17,19 @@ namespace EmailSender.Api.Controllers
         /// Create a attribute
         /// </summary>
         /// <param name="command">Body of the request</param>
-        /// <returns>A boddy containing the created resource id</returns>
+        /// <returns>A body containing the created resource ID</returns>
         [HttpPost]
         [ProducesResponseType(typeof(IdResponseModel), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Post([FromBody] CreateAttributeCommand command)
         {
             var result = await mediator.Send(command);
-            if (!result.IsValid && result.Notifications.Any())
-                return BadRequest(ApiError.CreateValidationProblem(HttpContext, result.Notifications));
 
-            return Created(nameof(GetById), result.Value);
+            return result.ErrorType switch
+            {
+                EErrorType.NOTIFICATION_ERROR => BadRequest(ApiError.CreateValidationProblem(HttpContext, result.Notifications)),
+                _ => Created(nameof(GetById), result.Value)
+            };
         }
 
         /// <summary>
@@ -44,10 +46,36 @@ namespace EmailSender.Api.Controllers
             var request = new GetAttributeByIdQuery { Id = id };
             var result = await mediator.Send(request);
 
-            if (result.ErrorType == EErrorType.NOT_FOUND)
-                return NotFound(ApiError.CreateProblem(HttpContext, HttpStatusCode.NotFound, "Not Found", "Could not found attribute with the given id."));
+            return result.ErrorType switch
+            {
+                EErrorType.NOT_FOUND => NotFound(ApiError.CreateProblem(HttpContext, HttpStatusCode.NotFound, "Not Found", "Could not found attribute with the given id.")),
+                _ => Ok(result.Value)
+            };
+        }
 
-            return Ok(result.Value);
+        /// <summary>
+        /// Update a attribute
+        /// </summary>
+        /// <param name="id">Attribute identifier</param>
+        /// <param name="request">Request body to update</param>
+        /// <returns>No content result</returns>
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status409Conflict)]
+        public async Task<IActionResult> Update(Guid id, [FromBody] UpdateAttributeCommand request)
+        {
+            request.Id = id;
+            var result = await mediator.Send(request);
+
+            return result.ErrorType switch
+            {
+                EErrorType.NOTIFICATION_ERROR => BadRequest(ApiError.CreateValidationProblem(HttpContext, result.Notifications)),
+                EErrorType.NOT_FOUND => NotFound(ApiError.CreateProblem(HttpContext, HttpStatusCode.NotFound, "Not found", "Could not found attribute with the given id.")),
+                EErrorType.CONFLICT => Conflict(ApiError.CreateProblem(HttpContext, HttpStatusCode.Conflict, "Conflict", "This attribute set is already associated with a template and cannot be modified.")),
+                _ => NoContent()
+            };
         }
     }
 }

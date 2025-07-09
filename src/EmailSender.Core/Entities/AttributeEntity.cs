@@ -20,7 +20,7 @@ namespace EmailSender.Core.Entities
 
         public string Name { get; private set; }
         public IEnumerable<Field> Fields { get; private set; }
-        public IEnumerable<Template> Templates { get; private set; }
+        public IEnumerable<Template> Templates { get; private set; } = new List<Template>();
 
         public override void Validate()
         {

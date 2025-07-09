@@ -6,7 +6,7 @@ namespace EmailSender.Application.Common
     public sealed class Result<T> : Notifiable<Notification> where T : class
     {
         public T? Value { get; private set; }
-        public EErrorType ErrorType { get; private set; }
+        public EErrorType? ErrorType { get; private set; } = EErrorType._;
 
         private Result(T value) => Value = value;
         private Result(EErrorType errorType) => ErrorType = errorType;

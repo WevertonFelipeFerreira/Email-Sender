@@ -4,6 +4,8 @@
     {
         NOTIFICATION_ERROR,
         VALIDATION_ERROR,
-        NOT_FOUND
+        NOT_FOUND,
+        CONFLICT,
+        _
     }
 }
