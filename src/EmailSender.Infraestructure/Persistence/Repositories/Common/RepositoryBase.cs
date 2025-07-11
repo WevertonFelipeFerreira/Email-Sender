@@ -48,6 +48,34 @@ namespace EmailSender.Infraestructure.Persistence.Repositories.Common
             await _context.SaveChangesAsync();
         }
 
+        public async Task<(IEnumerable<T> Items, long TotalItems)> PaginatedSearchAsync(int page, int pageSize, Expression<Func<T, bool>>? filter = null, IEnumerable<string>? includes = null, bool track = false)
+        {
+            var query = _dbSet.AsQueryable();
+
+            if (!track)
+                query = query.AsNoTracking();
+
+            if (filter is not null)
+                query = query.Where(filter);
+
+            if (includes is not null)
+            {
+                foreach (var include in includes)
+                    query = query.Include(include);
+            }
+
+            var totalItems = await query.CountAsync();
+
+            query = query
+                .OrderBy(e => e.Id)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize);
+
+            var items = await query.ToListAsync();
+
+            return (items, totalItems);
+        }
+
         public virtual async Task<T?> SearchAsync(Expression<Func<T, bool>> filter, IEnumerable<string> includes, bool track = false)
         {
             IQueryable<T> query = _dbSet;
