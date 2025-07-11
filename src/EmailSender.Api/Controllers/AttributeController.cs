@@ -77,5 +77,27 @@ namespace EmailSender.Api.Controllers
                 _ => NoContent()
             };
         }
+
+        /// <summary>
+        /// Delete a attribute
+        /// </summary>
+        /// <param name="id">Attribute identifier</param>
+        /// <param name="request">Request body to update</param>
+        /// <returns>No content result</returns>
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            DeleteAttributeCommand request = new() { Id = id };
+            var result = await mediator.Send(request);
+
+            return result.ErrorType switch
+            {
+                EErrorType.NOT_FOUND => NotFound(ApiError.CreateProblem(HttpContext, HttpStatusCode.NotFound, "Not found", "Could not found attribute with the given id.")),
+                _ => NoContent()
+            };
+        }
     }
 }
