@@ -1,5 +1,6 @@
 ﻿using EmailSender.Api.ProblemDetail;
 using EmailSender.Application.Commands;
+using EmailSender.Application.Common;
 using EmailSender.Application.Dtos.ViewModels;
 using EmailSender.Application.Queries;
 using EmailSender.Core.Enums;
@@ -98,6 +99,30 @@ namespace EmailSender.Api.Controllers
                 EErrorType.NOT_FOUND => NotFound(ApiError.CreateProblem(HttpContext, HttpStatusCode.NotFound, "Not found", "Could not found attribute with the given id.")),
                 _ => NoContent()
             };
+        }
+
+        /// <summary>
+        /// Retrieves a paginated list of attributes with optional filters.
+        /// </summary>
+        /// <param name="page">The page number to retrieve (starting from 1).</param>
+        /// <param name="pageSize">The number of items per page.</param>
+        /// <param name="name">Optional filter to search attributes by name (partial match).</param>
+        /// <param name="fieldNames">
+        /// Optional filter to match attributes associated with specific field names. 
+        /// Provide multiple names separated by commas (e.g., "Email,FirstName").
+        /// </param>
+        /// <returns>
+        /// Returns a <see cref="Paged{AttributeViewModel}"/> object containing the filtered and paginated attributes.
+        /// </returns>
+        [HttpGet]
+        [ProducesResponseType(typeof(Paged<AttributeViewModel>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> Get([FromQuery] int page = 1, [FromQuery] int pageSize = 10,
+            [FromQuery] string? name = null, [FromQuery] string? fieldNames = null)
+        {
+            GetAttributeQuery request = new(page, pageSize, name);
+            var result = await mediator.Send(request);
+
+            return Ok(result.Value);
         }
     }
 }

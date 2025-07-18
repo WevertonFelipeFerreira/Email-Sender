@@ -7,7 +7,7 @@ using MediatR;
 
 namespace EmailSender.Application.Queries.Handlers
 {
-    public class GetAttributeByIdQueryHandler(IAttributeRepository repository, IMapper mapper) 
+    public class GetAttributeByIdQueryHandler(IAttributeRepository repository, IMapper mapper)
         : IRequestHandler<GetAttributeByIdQuery, Result<AttributeViewModel>>
     {
         public async Task<Result<AttributeViewModel>> Handle(GetAttributeByIdQuery request, CancellationToken cancellationToken)

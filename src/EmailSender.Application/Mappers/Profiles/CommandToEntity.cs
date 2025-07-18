@@ -22,7 +22,7 @@ namespace EmailSender.Application.Mappers.Profiles
 
             CreateMap<UpdateAttributeCommand, AttributeEntity>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
-                .AfterMap((src, dest) => 
+                .AfterMap((src, dest) =>
                 {
                     dest.Validate();
                     dest.SetModifiedDate();

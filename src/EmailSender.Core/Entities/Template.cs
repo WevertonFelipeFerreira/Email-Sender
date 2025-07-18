@@ -5,14 +5,14 @@ namespace EmailSender.Core.Entities
 {
     public class Template : EntityBase
     {
-        public Template(string name , string html, string subject)
+        public Template(string name, string html, string subject)
         {
             Name = name;
             Html = html;
             Subject = subject;
         }
 
-        public Template(string name, string html, string subject, Guid attributeId) 
+        public Template(string name, string html, string subject, Guid attributeId)
             : this(name, html, subject)
         {
             AttributeId = attributeId;
@@ -20,7 +20,7 @@ namespace EmailSender.Core.Entities
 
         public Template()
         {
-            
+
         }
 
         public string Name { get; private set; }

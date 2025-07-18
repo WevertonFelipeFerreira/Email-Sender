@@ -17,6 +17,6 @@ namespace EmailSender.Api.Controllers
                 return BadRequest(ApiError.CreateValidationProblem(HttpContext, result.Notifications));
 
             return Created("", result.Value); // TODO update empty string to the get by id route when added.
-        } 
+        }
     }
 }

@@ -5,7 +5,7 @@ namespace EmailSender.Api.Extensions
 {
     public static class ModelStateExtensions
     {
-        public static IEnumerable<Notification> ToNotifications(this ModelStateDictionary modelState) 
+        public static IEnumerable<Notification> ToNotifications(this ModelStateDictionary modelState)
         {
             return modelState
                 .Where(kvp => kvp.Value!.Errors.Any())
