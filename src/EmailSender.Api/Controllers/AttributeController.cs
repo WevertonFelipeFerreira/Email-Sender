@@ -29,7 +29,7 @@ namespace EmailSender.Api.Controllers
             return result.ErrorType switch
             {
                 EErrorType.NOTIFICATION_ERROR => BadRequest(ApiError.CreateValidationProblem(HttpContext, result.Notifications)),
-                _ => Created(nameof(GetById), result.Value)
+                _ => CreatedAtAction(nameof(GetById), new { Id = result.Value!.id }, result.Value)
             };
         }
 

@@ -12,8 +12,7 @@ namespace EmailSender.Application.Mappers.Profiles
             #region Template
             CreateMap<CreateTemplateCommand, Template>()
                 .ForMember(dest => dest.Html, opt => opt.MapFrom(src => src.Content))
-                .ForMember(dest => dest.Attribute, opt => opt.Ignore())
-                .AfterMap((src, dest) => dest.Validate());
+                .ForMember(dest => dest.Attribute, opt => opt.Ignore());
             #endregion
 
             #region Attribute

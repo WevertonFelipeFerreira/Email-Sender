@@ -1,4 +1,6 @@
-﻿using EmailSender.Core.Entities.Common;
+﻿using EmailSender.Core.Entities.Aggregates;
+using EmailSender.Core.Entities.Common;
+using Flunt.Notifications;
 using Flunt.Validations;
 
 namespace EmailSender.Core.Entities
@@ -31,12 +33,26 @@ namespace EmailSender.Core.Entities
 
         public override void Validate()
         {
-            // TODO extract error messages to resource file
             AddNotifications(new Contract<Template>()
                 .Requires()
-                    .IsNotNullOrEmpty(Name, nameof(Name), "Name is required")
-                    .IsNotNullOrEmpty(Html, nameof(Html), "Html is required")
-                    .IsNotNullOrEmpty(Subject, nameof(Subject), "Subject is required"));
+                .IsNotNullOrWhiteSpace(Name, nameof(Name), "Name is required")
+                .IsNotNullOrWhiteSpace(Html, nameof(Html), "Html is required")
+                .IsNotNullOrWhiteSpace(Subject, nameof(Subject), "Subject is required"));
+        }
+
+        public void ValidateAttributes(IEnumerable<Field> fields)
+        {
+            var missingFields = fields
+                .Where(x => x.Required && !Html.Contains($"{{{{{x.Name}}}}}"))
+                .Select(field => new Notification("Attributes", $"The attribute {{{{{field.Name}}}}} is required."));
+
+            if (missingFields.Any())
+                missingFields.ToList().ForEach(AddNotification);
+        }
+
+        public void SanitizeHtml(Func<string, string> sanitizer)
+        {
+            Html = sanitizer(Html);
         }
     }
 }

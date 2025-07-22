@@ -109,5 +109,10 @@ namespace EmailSender.Infraestructure.Persistence.Repositories.Common
             _context.Entry(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
+
+        public async Task<bool> ExistsAsync(Expression<Func<T, bool>> filter)
+        {
+            return await _dbSet.AnyAsync(filter);
+        }
     }
 }
