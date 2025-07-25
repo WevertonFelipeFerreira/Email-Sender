@@ -9,6 +9,5 @@ namespace EmailSender.Application.Commands
         [JsonIgnore]
         public Guid Id { get; set; }
         public string? Name { get; set; } = null;
-        public IEnumerable<FieldModel> Fields { get; set; } = new List<FieldModel>();
     }
 }

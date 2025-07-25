@@ -60,11 +60,10 @@ namespace EmailSender.Api.Controllers
         /// <param name="id">Attribute identifier</param>
         /// <param name="request">Request body to update</param>
         /// <returns>No content result</returns>
-        [HttpPut("{id}")]
+        [HttpPatch("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status409Conflict)]
         public async Task<IActionResult> Update(Guid id, [FromBody] UpdateAttributeCommand request)
         {
             request.Id = id;
@@ -74,7 +73,6 @@ namespace EmailSender.Api.Controllers
             {
                 EErrorType.NOTIFICATION_ERROR => BadRequest(ApiError.CreateValidationProblem(HttpContext, result.Notifications)),
                 EErrorType.NOT_FOUND => NotFound(ApiError.CreateProblem(HttpContext, HttpStatusCode.NotFound, "Not found", "Could not found attribute with the given id.")),
-                EErrorType.CONFLICT => Conflict(ApiError.CreateProblem(HttpContext, HttpStatusCode.Conflict, "Conflict", "This attribute set is already associated with a template and cannot be modified.")),
                 _ => NoContent()
             };
         }

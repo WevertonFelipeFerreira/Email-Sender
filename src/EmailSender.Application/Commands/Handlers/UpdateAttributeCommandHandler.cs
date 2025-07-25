@@ -15,11 +15,7 @@ namespace EmailSender.Application.Commands.Handlers
             if (attribute is null)
                 return Result<NoContent>.CreateErrors(EErrorType.NOT_FOUND);
 
-            if (attribute.Templates.Any())
-                return Result<NoContent>.CreateErrors(EErrorType.CONFLICT);
-
-            mapper.Map(request, attribute);
-
+            attribute.Update(request.Name);
             if (!attribute.IsValid)
                 return Result<NoContent>.CreateErrors(attribute.Notifications);
 
