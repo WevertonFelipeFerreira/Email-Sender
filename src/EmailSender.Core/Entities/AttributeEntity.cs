@@ -30,9 +30,9 @@ namespace EmailSender.Core.Entities
                     .IsNotEmpty(Fields, nameof(Fields), "Fields is required."));
         }
 
-        public void Update(string? name) 
+        public void Update(string? name)
         {
-            if(name != null)
+            if (name != null)
                 Name = name;
 
             Validate();
