@@ -6,7 +6,7 @@ using MediatR;
 
 namespace EmailSender.Application.Commands.Handlers
 {
-    public class UpdateAttributeCommandHandler(IAttributeRepository attributeRepository, IMapper mapper)
+    public class UpdateAttributeCommandHandler(IAttributeRepository attributeRepository)
         : IRequestHandler<UpdateAttributeCommand, Result<NoContent>>
     {
         public async Task<Result<NoContent>> Handle(UpdateAttributeCommand request, CancellationToken cancellationToken)

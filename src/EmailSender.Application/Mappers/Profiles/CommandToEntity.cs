@@ -13,6 +13,11 @@ namespace EmailSender.Application.Mappers.Profiles
             CreateMap<CreateTemplateCommand, Template>()
                 .ForMember(dest => dest.Html, opt => opt.MapFrom(src => src.Content))
                 .ForMember(dest => dest.Attribute, opt => opt.Ignore());
+
+            CreateMap<UpdateTemplateCommand, Template>()
+                .ForMember(dest => dest.Html, opt => opt.MapFrom(src => src.Content))
+                .ForMember(dest => dest.Attribute, opt => opt.Ignore())
+                .AfterMap((src, dest) => dest.SetModifiedDate());
             #endregion
 
             #region Attribute

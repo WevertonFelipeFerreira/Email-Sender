@@ -52,5 +52,27 @@ namespace EmailSender.Api.Controllers
                 _ => Ok(result.Value)
             };
         }
+
+        /// <summary>
+        /// Update a email template
+        /// </summary>
+        /// <param name="command">Body of the request</param>
+        /// <returns>No content</returns>
+        [HttpPut("{id}")]
+        [ProducesResponseType(typeof(IdResponseModel), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Update(Guid id, [FromBody] UpdateTemplateCommand command)
+        {
+            command.Id = id;
+            var result = await mediator.Send(command);
+
+            return result.ErrorType switch
+            {
+                EErrorType.NOTIFICATION_ERROR => BadRequest(ApiError.CreateValidationProblem(HttpContext, result.Notifications)),
+                EErrorType.NOT_FOUND => NotFound(ApiError.CreateProblem(HttpContext, HttpStatusCode.NotFound, "Not Found", "Could not found template with the given id.")),
+                _ => NoContent()
+            };
+        }
     }
 }
