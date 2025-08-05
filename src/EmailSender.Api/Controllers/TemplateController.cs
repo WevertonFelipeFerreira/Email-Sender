@@ -74,5 +74,26 @@ namespace EmailSender.Api.Controllers
                 _ => NoContent()
             };
         }
+
+        /// <summary>
+        /// Delete a email template
+        /// </summary>
+        /// <param name="id">Template identifier</param>
+        /// <returns>No content</returns>
+        [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(IdResponseModel), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            DeleteTemplateCommand command = new() { Id = id };
+            var result = await mediator.Send(command);
+
+            return result.ErrorType switch
+            {
+                EErrorType.NOT_FOUND => NotFound(ApiError.CreateProblem(HttpContext, HttpStatusCode.NotFound, "Not Found", "Could not found template with the given id.")),
+                _ => NoContent()
+            };
+        }
     }
 }
