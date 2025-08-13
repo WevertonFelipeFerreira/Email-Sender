@@ -7,12 +7,11 @@ using MediatR;
 
 namespace EmailSender.Application.Commands.Handlers
 {
-    internal class CreateAttributeCommandHandler(IAttributeRepository repository, IMapper mapper)
-        : IRequestHandler<CreateAttributeCommand, Result<IdResponseModel>>
+    public class CreateSenderCommandHandler(ISenderRepository repository, IMapper mapper) : IRequestHandler<CreateSenderCommand, Result<IdResponseModel>>
     {
-        public async Task<Result<IdResponseModel>> Handle(CreateAttributeCommand request, CancellationToken cancellationToken)
+        public async Task<Result<IdResponseModel>> Handle(CreateSenderCommand request, CancellationToken cancellationToken)
         {
-            var entity = mapper.Map<AttributeEntity>(request);
+            var entity = mapper.Map<Sender>(request);
             if (!entity.IsValid)
                 return Result<IdResponseModel>.CreateErrors(entity.Notifications);
 

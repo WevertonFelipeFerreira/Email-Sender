@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using EmailSender.Application.Common;
+﻿using EmailSender.Application.Common;
 using EmailSender.Core.Enums;
 using EmailSender.Core.Interfaces.Repositories;
 using MediatR;

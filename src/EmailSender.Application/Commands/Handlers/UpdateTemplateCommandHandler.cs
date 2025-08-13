@@ -13,7 +13,7 @@ namespace EmailSender.Application.Commands.Handlers
         public async Task<Result<NoContent>> Handle(UpdateTemplateCommand request, CancellationToken cancellationToken)
         {
             var entity = await templateRepository.FindByIdAsync(request.Id);
-            if(entity == null)
+            if (entity == null)
                 return Result<NoContent>.CreateErrors(EErrorType.NOT_FOUND);
 
             AttributeEntity? attribute = null;

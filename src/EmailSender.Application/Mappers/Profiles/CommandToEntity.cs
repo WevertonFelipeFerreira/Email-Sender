@@ -34,6 +34,12 @@ namespace EmailSender.Application.Mappers.Profiles
 
             CreateMap<FieldModel, Field>();
             #endregion
+
+            #region Sender
+            CreateMap<CreateSenderCommand, Sender>()
+                .ForMember(dest => dest.HashPassword, opt => opt.MapFrom(src => src.Password)) // Use resolver encrypting password
+                .AfterMap((src, dest) => dest.Validate());
+            #endregion
         }
     }
 }

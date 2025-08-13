@@ -33,7 +33,7 @@ namespace EmailSender.Application.Commands.Handlers
             entity.SanitizeHtml(sanitizer.Sanitize);
 
             await templateRepository.InsertAsync(entity);
-            return Result<IdResponseModel>.CreateSuccess(new IdResponseModel(entity.Id));
+            return Result<IdResponseModel>.CreateSuccess(new(entity.Id));
         }
     }
 }

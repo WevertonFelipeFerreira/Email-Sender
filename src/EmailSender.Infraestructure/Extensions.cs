@@ -13,6 +13,7 @@ namespace EmailSender.Infraestructure
         {
             services.AddScoped<ITemplateRepository, TemplateRepository>();
             services.AddScoped<IAttributeRepository, AttributeRepository>();
+            services.AddScoped<ISenderRepository, SenderRepository>();
 
             return services;
         }
