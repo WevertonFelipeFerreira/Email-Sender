@@ -15,7 +15,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDb(builder.Configuration);
 builder.Services.AddMapper();
 builder.Services.AddCqrs();
-builder.Services.AddDependencyInjection();
+builder.Services.AddRepositories();
+builder.Services.AddOptions(builder.Configuration);
+builder.Services.AddServices();
 builder.Services.AddCustomModelStateValidation();
 
 var app = builder.Build();

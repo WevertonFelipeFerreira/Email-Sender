@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EmailSender.Application.Commands;
+using EmailSender.Application.Mappers.Resolvers;
 using EmailSender.Core.Entities;
 using EmailSender.Core.Entities.Aggregates;
 
@@ -37,7 +38,7 @@ namespace EmailSender.Application.Mappers.Profiles
 
             #region Sender
             CreateMap<CreateSenderCommand, Sender>()
-                .ForMember(dest => dest.HashPassword, opt => opt.MapFrom(src => src.Password)) // Use resolver encrypting password
+                .ForMember(x => x.EncryptedPassword, opt => opt.MapFrom<EncryptPasswordResolver>())
                 .AfterMap((src, dest) => dest.Validate());
             #endregion
         }
