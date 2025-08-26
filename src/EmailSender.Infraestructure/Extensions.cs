@@ -26,7 +26,7 @@ namespace EmailSender.Infraestructure
                 );
         }
 
-        public static IServiceCollection AddOptions(this IServiceCollection services, IConfiguration cfg) 
+        public static IServiceCollection AddOptions(this IServiceCollection services, IConfiguration cfg)
         {
             services.AddOptions<AuthKeysOptions>()
                 .Bind(cfg.GetSection(AuthKeysOptions.AuthKeys));

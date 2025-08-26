@@ -1,9 +1,11 @@
 ﻿using EmailSender.Api.ProblemDetail;
 using EmailSender.Application.Commands;
 using EmailSender.Application.Dtos.ViewModels;
+using EmailSender.Application.Queries;
 using EmailSender.Core.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace EmailSender.Api.Controllers
 {
@@ -30,10 +32,25 @@ namespace EmailSender.Api.Controllers
             };
         }
 
+        /// <summary>
+        /// Get a sender by your identifier
+        /// </summary>
+        /// <param name="id">Sender identifier</param>
+        /// <returns>The requested sender</returns>
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(SenderViewModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            var request = new GetSenderByIdQuery { Id = id };
+            var result = await mediator.Send(request);
+
+            return result.ErrorType switch
+            {
+                EErrorType.NOT_FOUND => NotFound(ApiError.CreateProblem(HttpContext, HttpStatusCode.NotFound, "Not Found", "Could not found sender with the given id.")),
+                _ => Ok(result.Value)
+            };
         }
     }
 }
