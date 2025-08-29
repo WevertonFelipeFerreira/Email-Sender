@@ -22,8 +22,6 @@ builder.Services.AddServices();
 builder.Services.AddCustomModelStateValidation();
 builder.Services.AddSwaggerGen(c =>
 {
-    //c.SwaggerDoc("v1", new OpenApiInfo { Title = "Email Sender", Version = "v1" });
-
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
