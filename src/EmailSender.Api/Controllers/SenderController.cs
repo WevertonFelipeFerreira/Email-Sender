@@ -4,6 +4,7 @@ using EmailSender.Application.Dtos.ViewModels;
 using EmailSender.Application.Queries;
 using EmailSender.Core.Enums;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -19,6 +20,7 @@ namespace EmailSender.Api.Controllers
         /// <param name="command">Body of the request</param>
         /// <returns>A body containing the created resource ID</returns>
         [HttpPost]
+        [Authorize(Roles = "sender-all, sender-write")]
         [ProducesResponseType(typeof(IdResponseModel), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Post([FromBody] CreateSenderCommand command)
@@ -38,6 +40,7 @@ namespace EmailSender.Api.Controllers
         /// <param name="id">Sender identifier</param>
         /// <returns>The requested sender</returns>
         [HttpGet("{id}")]
+        [Authorize(Roles = "sender-all, sender-read")]
         [ProducesResponseType(typeof(SenderViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]

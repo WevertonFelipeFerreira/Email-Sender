@@ -4,6 +4,7 @@ using EmailSender.Application.Dtos.ViewModels;
 using EmailSender.Application.Queries;
 using EmailSender.Core.Enums;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -19,6 +20,7 @@ namespace EmailSender.Api.Controllers
         /// <param name="command">Body of the request</param>
         /// <returns>A body containing the created resource ID</returns>
         [HttpPost]
+        [Authorize(Roles = "template-all, template-write")]
         [ProducesResponseType(typeof(IdResponseModel), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Post([FromBody] CreateTemplateCommand command)
@@ -38,6 +40,7 @@ namespace EmailSender.Api.Controllers
         /// <param name="id">Template identifier</param>
         /// <returns>The requested temmplate</returns>
         [HttpGet("{id}")]
+        [Authorize(Roles = "template-all, template-read")]
         [ProducesResponseType(typeof(TemplateViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
@@ -59,6 +62,7 @@ namespace EmailSender.Api.Controllers
         /// <param name="command">Body of the request</param>
         /// <returns>No content</returns>
         [HttpPut("{id}")]
+        [Authorize(Roles = "template-all, template-write")]
         [ProducesResponseType(typeof(IdResponseModel), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
@@ -81,6 +85,7 @@ namespace EmailSender.Api.Controllers
         /// <param name="id">Template identifier</param>
         /// <returns>No content</returns>
         [HttpDelete("{id}")]
+        [Authorize(Roles = "template-all, template-write")]
         [ProducesResponseType(typeof(IdResponseModel), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]

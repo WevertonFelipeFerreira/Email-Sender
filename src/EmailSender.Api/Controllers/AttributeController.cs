@@ -5,6 +5,7 @@ using EmailSender.Application.Dtos.ViewModels;
 using EmailSender.Application.Queries;
 using EmailSender.Core.Enums;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -20,6 +21,7 @@ namespace EmailSender.Api.Controllers
         /// <param name="command">Body of the request</param>
         /// <returns>A body containing the created resource ID</returns>
         [HttpPost]
+        [Authorize(Roles = "attributes-all, attributes-write")]
         [ProducesResponseType(typeof(IdResponseModel), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Post([FromBody] CreateAttributeCommand command)
@@ -39,6 +41,7 @@ namespace EmailSender.Api.Controllers
         /// <param name="id">Attribute identifier</param>
         /// <returns>The requested Attribute</returns>
         [HttpGet("{id}")]
+        [Authorize(Roles = "attributes-all, attributes-read")]
         [ProducesResponseType(typeof(AttributeViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
@@ -61,6 +64,7 @@ namespace EmailSender.Api.Controllers
         /// <param name="request">Request body to update</param>
         /// <returns>No content result</returns>
         [HttpPatch("{id}")]
+        [Authorize(Roles = "attributes-all, attributes-write")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
@@ -84,6 +88,7 @@ namespace EmailSender.Api.Controllers
         /// <param name="request">Request body to update</param>
         /// <returns>No content result</returns>
         [HttpDelete("{id}")]
+        [Authorize(Roles = "attributes-all, attributes-write")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
@@ -113,6 +118,7 @@ namespace EmailSender.Api.Controllers
         /// Returns a <see cref="Paged{AttributeViewModel}"/> object containing the filtered and paginated attributes.
         /// </returns>
         [HttpGet]
+        [Authorize(Roles = "attributes-all, attributes-read")]
         [ProducesResponseType(typeof(Paged<AttributeViewModel>), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get([FromQuery] int page = 1, [FromQuery] int pageSize = 10,
             [FromQuery] string? name = null, [FromQuery] string? fieldNames = null)

@@ -18,6 +18,7 @@ namespace EmailSender.Api.Configurations.Authentication
                 {
                     options.Authority = authority;
                     options.Audience = validAudiences;
+                    options.RequireHttpsMetadata = false;
                     options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                     {
                         ValidateIssuer = true,
