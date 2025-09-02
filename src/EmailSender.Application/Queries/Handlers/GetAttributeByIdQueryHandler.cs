@@ -12,7 +12,7 @@ namespace EmailSender.Application.Queries.Handlers
     {
         public async Task<Result<AttributeViewModel>> Handle(GetAttributeByIdQuery request, CancellationToken cancellationToken)
         {
-            var entity = await repository.FindByIdAsync(request.Id);
+            var entity = await repository.SearchAsync(x => x.Id == request.Id && x.UserId == request.UserId);
             if (entity == null)
                 return Result<AttributeViewModel>.CreateErrors(EErrorType.NOT_FOUND);
 

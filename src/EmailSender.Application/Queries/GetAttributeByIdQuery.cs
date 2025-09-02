@@ -7,5 +7,6 @@ namespace EmailSender.Application.Queries
     public class GetAttributeByIdQuery : IRequest<Result<AttributeViewModel>>
     {
         public Guid Id { get; set; }
+        public Guid? UserId { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using EmailSender.Api.ProblemDetail;
+﻿using EmailSender.Api.Extensions;
+using EmailSender.Api.ProblemDetail;
 using EmailSender.Application.Commands;
 using EmailSender.Application.Common;
 using EmailSender.Application.Dtos.ViewModels;
@@ -26,6 +27,7 @@ namespace EmailSender.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Post([FromBody] CreateAttributeCommand command)
         {
+            command.UserId = HttpContext.User.GetUserId();
             var result = await mediator.Send(command);
 
             return result.ErrorType switch
@@ -47,7 +49,7 @@ namespace EmailSender.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var request = new GetAttributeByIdQuery { Id = id };
+            var request = new GetAttributeByIdQuery { Id = id, UserId = HttpContext.User.GetUserId() };
             var result = await mediator.Send(request);
 
             return result.ErrorType switch
@@ -71,6 +73,7 @@ namespace EmailSender.Api.Controllers
         public async Task<IActionResult> Update(Guid id, [FromBody] UpdateAttributeCommand request)
         {
             request.Id = id;
+            request.UserId = HttpContext.User.GetUserId();
             var result = await mediator.Send(request);
 
             return result.ErrorType switch
@@ -94,7 +97,7 @@ namespace EmailSender.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(Guid id)
         {
-            DeleteAttributeCommand request = new() { Id = id };
+            DeleteAttributeCommand request = new() { Id = id, UserId = HttpContext.User.GetUserId() };
             var result = await mediator.Send(request);
 
             return result.ErrorType switch
@@ -121,9 +124,9 @@ namespace EmailSender.Api.Controllers
         [Authorize(Roles = "attributes-all, attributes-read")]
         [ProducesResponseType(typeof(Paged<AttributeViewModel>), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get([FromQuery] int page = 1, [FromQuery] int pageSize = 10,
-            [FromQuery] string? name = null, [FromQuery] string? fieldNames = null)
+            [FromQuery] string? name = null)
         {
-            GetAttributeQuery request = new(page, pageSize, name);
+            GetAttributeQuery request = new(page, pageSize, name, HttpContext.User.GetUserId());
             var result = await mediator.Send(request);
 
             return Ok(result.Value);

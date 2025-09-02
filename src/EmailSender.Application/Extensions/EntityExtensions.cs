@@ -8,7 +8,8 @@ namespace EmailSender.Application.Extensions
     {
         public static Expression<Func<AttributeEntity, bool>> SearchQuery(this GetAttributeQuery query)
         {
-            return e => (string.IsNullOrEmpty(query.Name) || e.Name.Contains(query.Name));
+            return e => (string.IsNullOrEmpty(query.Name) || e.Name.Contains(query.Name)) &&
+                        e.UserId.Equals(query.UserId);
         }
     }
 }

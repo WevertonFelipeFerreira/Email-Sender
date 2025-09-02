@@ -64,7 +64,7 @@ namespace EmailSender.Infraestructure.Persistence.Repositories.Common
                     query = query.Include(include);
             }
 
-            var totalItems = await query.CountAsync();
+            var totalItems = await query.CountAsync(filter!);
 
             query = query
                 .OrderBy(e => e.Id)

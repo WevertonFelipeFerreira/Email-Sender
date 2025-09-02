@@ -9,12 +9,14 @@ namespace EmailSender.Application.Queries
         public int Page { get; set; }
         public int PageSize { get; set; }
         public string? Name { get; set; }
+        public Guid? UserId { get; set; }
 
-        public GetAttributeQuery(int page = 1, int pageSize = 10, string? name = null)
+        public GetAttributeQuery(int page = 1, int pageSize = 10, string? name = null, Guid? userId = null)
         {
             Page = page;
             PageSize = pageSize;
             Name = name;
+            UserId = userId;
         }
     }
 }

@@ -8,6 +8,10 @@ namespace EmailSender.Application.Commands
     {
         [JsonIgnore]
         public Guid Id { get; set; }
+        [JsonIgnore]
+        public Guid? UserId { get; set; }
+
         public string? Name { get; set; } = null;
+
     }
 }

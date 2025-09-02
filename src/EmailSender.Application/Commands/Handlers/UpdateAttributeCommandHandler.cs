@@ -10,7 +10,7 @@ namespace EmailSender.Application.Commands.Handlers
     {
         public async Task<Result<NoContent>> Handle(UpdateAttributeCommand request, CancellationToken cancellationToken)
         {
-            var attribute = await attributeRepository.FindByIdAsync(request.Id, ["Templates"]);
+            var attribute = await attributeRepository.SearchAsync(x => x.Id == request.Id && x.UserId == request.UserId);
             if (attribute is null)
                 return Result<NoContent>.CreateErrors(EErrorType.NOT_FOUND);
 

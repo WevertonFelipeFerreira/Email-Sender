@@ -6,5 +6,6 @@ namespace EmailSender.Application.Commands
     public class DeleteAttributeCommand : IRequest<Result<NoContent>>
     {
         public Guid Id { get; set; }
+        public Guid? UserId { get; set; }
     }
 }

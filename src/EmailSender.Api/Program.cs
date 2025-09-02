@@ -47,6 +47,7 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 builder.Services.AddAuth(builder.Configuration);
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 

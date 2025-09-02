@@ -9,7 +9,7 @@ namespace EmailSender.Application.Commands.Handlers
     {
         public async Task<Result<NoContent>> Handle(DeleteAttributeCommand request, CancellationToken cancellationToken)
         {
-            var entity = await attributeRepository.FindByIdAsync(request.Id);
+            var entity = await attributeRepository.SearchAsync(x => x.Id == request.Id && x.UserId == request.UserId);
             if (entity is null)
                 return Result<NoContent>.CreateErrors(EErrorType.NOT_FOUND);
 
